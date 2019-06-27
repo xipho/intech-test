@@ -1,0 +1,25 @@
+.admin-sidebar {
+    padding-top: 35px;
+    background-color: #483da2;
+    height: 100vh;
+    font-size: 24px;
+}
+
+.admin-sidebar ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+.admin-sidebar ul li a {
+    padding-left: 25px;
+    line-height: 50px;
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    background-color: #483da2;
+    transition: background-color 500ms ease-in-out;
+}
+
+.admin-sidebar ul li a:hover {
+    background-color: #3a3575;
+}
