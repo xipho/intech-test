@@ -17,6 +17,7 @@ public class Topic {
     private User author;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     private Category category;
 
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)

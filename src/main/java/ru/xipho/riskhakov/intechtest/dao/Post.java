@@ -15,6 +15,7 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User author;
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     private Topic topic;
 
     public Long getId() {
