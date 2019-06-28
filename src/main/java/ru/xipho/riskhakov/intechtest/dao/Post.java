@@ -1,6 +1,11 @@
 package ru.xipho.riskhakov.intechtest.dao;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import java.util.Date;
 
 @Entity
 public class Post {
@@ -9,7 +14,13 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(length = 4096)
     private String text;
+
+    @CreationTimestamp
+    private Date createdAt;
+    @UpdateTimestamp
+    private Date updatedAt;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
@@ -48,5 +59,21 @@ public class Post {
 
     public void setTopic(Topic topic) {
         this.topic = topic;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

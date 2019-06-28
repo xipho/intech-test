@@ -1,6 +1,12 @@
 package ru.xipho.riskhakov.intechtest.dao;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -10,7 +16,19 @@ public class Topic {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull
     private String title;
+    @Nullable
+    private String description;
+
+    @Column(unique = true)
+    private String slug;
+
+
+    @CreationTimestamp
+    private Date createdAt;
+    @UpdateTimestamp
+    private Date updatedAt;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
@@ -49,5 +67,37 @@ public class Topic {
 
     public void setPosts(Set<Post> posts) {
         this.posts = posts;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

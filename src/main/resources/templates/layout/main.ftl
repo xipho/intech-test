@@ -1,3 +1,13 @@
+<#assign known = Session.SPRING_SECURITY_CONTEXT??/>
+<#if known>
+    <#assign
+        user = Session.SPRING_SECURITY_CONTEXT.authentication.principal
+        name = user.username
+        isAdmin = user.isAdmin()
+    />
+<#else>
+    <#assign name="Guest" isAdmin=false />
+</#if>
 <#macro page title>
     <!doctype html>
     <html lang="en">
