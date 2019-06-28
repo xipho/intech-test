@@ -1,4 +1,4 @@
-package ru.xipho.riskhakov.intechtest.dao;
+package ru.xipho.riskhakov.intechtest.domain;
 
 import org.springframework.security.core.GrantedAuthority;
 

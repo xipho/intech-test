@@ -6,13 +6,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
-import ru.xipho.riskhakov.intechtest.dao.Role;
-import ru.xipho.riskhakov.intechtest.dao.User;
+import ru.xipho.riskhakov.intechtest.domain.Role;
+import ru.xipho.riskhakov.intechtest.domain.User;
 import ru.xipho.riskhakov.intechtest.dto.UserDto;
 import ru.xipho.riskhakov.intechtest.jpa.UserRepo;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 

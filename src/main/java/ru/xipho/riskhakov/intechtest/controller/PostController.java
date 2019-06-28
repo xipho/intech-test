@@ -6,11 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.xipho.riskhakov.intechtest.dao.Post;
-import ru.xipho.riskhakov.intechtest.dao.Topic;
-import ru.xipho.riskhakov.intechtest.dao.User;
+import ru.xipho.riskhakov.intechtest.domain.Post;
+import ru.xipho.riskhakov.intechtest.domain.Topic;
+import ru.xipho.riskhakov.intechtest.domain.User;
 import ru.xipho.riskhakov.intechtest.service.PostService;
 import ru.xipho.riskhakov.intechtest.service.TopicService;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 @Controller
 @RequestMapping("/posts")
@@ -27,12 +30,12 @@ public class PostController {
 
     @PostMapping("/{topicId:\\d+}")
     public String addPost(@AuthenticationPrincipal User user,
-                          @PathVariable Long topicId, Post post) {
+                          @PathVariable Long topicId, Post post) throws UnsupportedEncodingException {
 
         post.setAuthor(user);
         Topic topic = topicService.findById(topicId);
         post.setTopic(topic);
         Post createdPost = postService.createPost(post);
-        return "redirect:/topics/" + topic.getSlug();
+        return "redirect:/topics/" + URLEncoder.encode(topic.getSlug(), "UTF-8");
     }
 }

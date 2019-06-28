@@ -1,11 +1,9 @@
-package ru.xipho.riskhakov.intechtest.dao;
+package ru.xipho.riskhakov.intechtest.domain;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.xipho.riskhakov.intechtest.validations.ValidPassword;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Set;
 

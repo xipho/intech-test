@@ -1,7 +1,9 @@
 package ru.xipho.riskhakov.intechtest.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ru.xipho.riskhakov.intechtest.dao.Topic;
+import ru.xipho.riskhakov.intechtest.domain.Topic;
 import ru.xipho.riskhakov.intechtest.jpa.TopicRepo;
 
 import java.util.List;
@@ -15,8 +17,8 @@ public class TopicService {
         this.topicRepo = topicRepo;
     }
 
-    public List<Topic> findAll() {
-        return topicRepo.findAll();
+    public Page<Topic> findAllPaginated(Pageable pageable) {
+        return topicRepo.findAllByOrderByCreatedAtAsc(pageable);
     }
 
     public Topic findBySlug(String slug) {

@@ -24,7 +24,7 @@
     background-color: #3a3575;
 }
 
-.post-row {
+.post-row, .add-post-row {
     border-radius: 5px;
     border: 1px solid #a6a6a6;
     padding: 10px;

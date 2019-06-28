@@ -1,29 +1,20 @@
-package ru.xipho.riskhakov.intechtest.dao;
+package ru.xipho.riskhakov.intechtest.domain;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
-public class Topic {
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    private String title;
-    @Nullable
-    private String description;
-
-    @Column(unique = true)
-    private String slug;
-
+    @Column(length = 4096)
+    private String text;
 
     @CreationTimestamp
     private Date createdAt;
@@ -33,9 +24,9 @@ public class Topic {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
-
-    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
-    private Set<Post> posts;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
+    private Topic topic;
 
     public Long getId() {
         return id;
@@ -45,12 +36,12 @@ public class Topic {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getText() {
+        return text;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public User getAuthor() {
@@ -61,20 +52,12 @@ public class Topic {
         this.author = author;
     }
 
-    public Set<Post> getPosts() {
-        return posts;
+    public Topic getTopic() {
+        return topic;
     }
 
-    public void setPosts(Set<Post> posts) {
-        this.posts = posts;
-    }
-
-    public String getSlug() {
-        return slug;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 
     public Date getCreatedAt() {
@@ -91,13 +74,5 @@ public class Topic {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

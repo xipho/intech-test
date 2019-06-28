@@ -1,4 +1,5 @@
-<#import "layout/main.ftl" as m>
+<#import "layout/main.ftl" as m/>
+<#import "layout/pager.ftl" as p/>
 <@m.page title="Topics">
     <div class="container">
         <div class="row">
@@ -8,6 +9,8 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
+                <hr>
+                <@p.pager page=topics url="/topics" />
                 <table class="table">
                     <thead>
                     <th>ID</th>
@@ -16,7 +19,7 @@
                     <th></th>
                     </thead>
                     <tbody>
-                    <#list topics as topic>
+                    <#list topics.content as topic>
                         <tr>
                             <td>${topic.id}</td>
                             <td>
@@ -26,7 +29,6 @@
                             <td>
                                 Author: ${topic.author.username}<br>
                                 Created: ${topic.createdAt}<br>
-                                Updated: ${topic.updatedAt}<br>
                             </td>
                         </tr>
                     <#else>
@@ -40,6 +42,7 @@
                     <th></th>
                     </tfoot>
                 </table>
+                <@p.pager page=topics url="/topics" />
             </div>
         </div>
     </div>

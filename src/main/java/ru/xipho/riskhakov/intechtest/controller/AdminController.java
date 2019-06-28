@@ -1,12 +1,11 @@
 package ru.xipho.riskhakov.intechtest.controller;
 
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.xipho.riskhakov.intechtest.dao.User;
+import ru.xipho.riskhakov.intechtest.domain.User;
 import ru.xipho.riskhakov.intechtest.service.UserService;
 
 import java.util.List;

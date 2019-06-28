@@ -1,21 +1,29 @@
-package ru.xipho.riskhakov.intechtest.dao;
+package ru.xipho.riskhakov.intechtest.domain;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
-public class Post {
+public class Topic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 4096)
-    private String text;
+    @NotNull
+    private String title;
+    @Nullable
+    private String description;
+
+    @Column(unique = true)
+    private String slug;
+
 
     @CreationTimestamp
     private Date createdAt;
@@ -25,9 +33,10 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
-    private Topic topic;
+
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
+    @OrderBy("createdAt")
+    private Set<Post> posts;
 
     public Long getId() {
         return id;
@@ -37,12 +46,12 @@ public class Post {
         this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public String getTitle() {
+        return title;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public User getAuthor() {
@@ -53,12 +62,20 @@ public class Post {
         this.author = author;
     }
 
-    public Topic getTopic() {
-        return topic;
+    public Set<Post> getPosts() {
+        return posts;
     }
 
-    public void setTopic(Topic topic) {
-        this.topic = topic;
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 
     public Date getCreatedAt() {
@@ -75,5 +92,13 @@ public class Post {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

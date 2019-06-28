@@ -1,7 +1,10 @@
 package ru.xipho.riskhakov.intechtest.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ru.xipho.riskhakov.intechtest.dao.Post;
+import ru.xipho.riskhakov.intechtest.domain.Post;
+import ru.xipho.riskhakov.intechtest.domain.Topic;
 import ru.xipho.riskhakov.intechtest.jpa.PostRepo;
 
 import java.util.List;
@@ -16,7 +19,11 @@ public class PostService {
     }
 
     public List<Post> loadPosts() {
-        return postRepo.findAll();
+        return postRepo.findByOrderByCreatedAtAsc();
+    }
+
+    public Page<Post> loadPaginatedPosts(Topic topic, Pageable pageable) {
+        return postRepo.findAllByTopicOrderByCreatedAt(topic, pageable);
     }
 
     public Post createPost(Post post) {
