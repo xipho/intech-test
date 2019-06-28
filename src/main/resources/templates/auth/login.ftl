@@ -23,6 +23,7 @@
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Login</button>
+                            <a class="btn btn-primary" href="/register">Register</a>
                         </div>
                     </form>
                 </div>
