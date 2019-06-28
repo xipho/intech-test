@@ -18,10 +18,9 @@
                     <p>${post.text}</p>
                     <#if m.isAdmin || m.name == post.author.username>
                         <hr>
-                        <form action="/posts/${post.id}" method="post">
+                        <form action="/posts/delete/${post.id}" method="post">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                            <input type="hidden" name="method" value="DELETE">
-                            <button type="submit" class="btn btn-danger float-right">Delete post</button>
+                            <a class="btn btn-danger float-right" onclick="deletePrompt(this)">Delete post</a>
                         </form>
                     </#if>
                 </div>
@@ -47,4 +46,14 @@
             </div>
         </div>
     </div>
+    <script>
+        function deletePrompt(element) {
+            if (confirm("Are you sure to delete post?")) {
+                element.parentElement.submit();
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
 </@m.page>

@@ -1,21 +1,16 @@
 package ru.xipho.riskhakov.intechtest.controller;
 
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import ru.xipho.riskhakov.intechtest.dto.UserDto;
 import ru.xipho.riskhakov.intechtest.service.UserService;
-import ru.xipho.riskhakov.intechtest.validations.ValidPassword;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 @Controller
 public class AuthController {
@@ -40,11 +35,6 @@ public class AuthController {
     public String register() {
         return "auth/register";
     }
-
-//    @PostMapping("/login")
-//    public String signIn() {
-//        return "auth/login";
-//    }
 
     @PostMapping(value = "/register")
     public ModelAndView signUp(

@@ -13,7 +13,7 @@
                 <@p.pager page=topics url="/topics" />
                 <table class="table">
                     <thead>
-                    <th>ID</th>
+                    <th>Remove</th>
                     <th>Name</th>
                     <th>Info</th>
                     <th></th>
@@ -21,7 +21,16 @@
                     <tbody>
                     <#list topics.content as topic>
                         <tr>
-                            <td>${topic.id}</td>
+                            <td>
+                                <#if m.isAdmin || topic.author.username == m.name >
+                                <form action="/topics/${topic.id}/delete" method="post">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                                    <a class="btn btn-xs btn-danger text-white" onclick="deletePrompt(this, '${topic.title}')"><i class="fas fa-trash-alt"></i></a>
+                                </form>
+                                <#else>
+                                    ${topic.id}
+                                </#if>
+                            </td>
                             <td>
                                 <h6><a href="/topics/${topic.slug}">${topic.title}</a></h6>
                                 <p>${topic.description}</p>
@@ -36,7 +45,7 @@
                     </#list>
                     </tbody>
                     <tfoot>
-                    <th>ID</th>
+                    <th>Remove</th>
                     <th>Name</th>
                     <th>Info</th>
                     <th></th>
@@ -46,4 +55,15 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function deletePrompt(element,title) {
+            if (confirm("Are you sure to delete topic '" + title + "'")) {
+                element.parentElement.submit();
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
 </@m.page>

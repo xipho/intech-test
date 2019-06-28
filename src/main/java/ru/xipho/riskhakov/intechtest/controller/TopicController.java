@@ -15,7 +15,6 @@ import ru.xipho.riskhakov.intechtest.service.TopicService;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.List;
 
 @Controller
 @RequestMapping("/topics")
@@ -57,9 +56,15 @@ public class TopicController {
     }
 
     @PostMapping("")
-    public String addTopic(@AuthenticationPrincipal User user, Topic topic) {
+    public String addTopic(@AuthenticationPrincipal User user, Topic topic) throws UnsupportedEncodingException {
         topic.setAuthor(user);
-        topicService.createTopic(topic);
+        topic = topicService.createTopic(topic);
+        return "redirect:/topics/" + URLEncoder.encode(topic.getSlug(), "UTF-8");
+    }
+
+    @PostMapping("/{id:\\d+}/delete")
+    public String deleteTopic(@PathVariable long id) {
+        topicService.deleteTopic(id);
         return "redirect:/topics";
     }
 }
