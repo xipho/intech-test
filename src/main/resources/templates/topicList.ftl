@@ -13,20 +13,24 @@
                 <@p.pager page=topics url="/topics" />
                 <table class="table">
                     <thead>
-                    <th>Remove</th>
-                    <th>Name</th>
-                    <th>Info</th>
-                    <th></th>
+                        <tr>
+                            <th>Remove</th>
+                            <th>Name</th>
+                            <th>Info</th>
+                            <th></th>
+                        </tr>
                     </thead>
                     <tbody>
                     <#list topics.content as topic>
                         <tr>
                             <td>
                                 <#if m.isAdmin || topic.author.username == m.name >
-                                <form action="/topics/${topic.id}/delete" method="post">
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                                    <a class="btn btn-xs btn-danger text-white" onclick="deletePrompt(this, '${topic.title}')"><i class="fas fa-trash-alt"></i></a>
-                                </form>
+                                    <form action="/topics/${topic.id}/delete" method="post">
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                                        <a class="btn btn-xs btn-danger text-white"
+                                           onclick="deletePrompt(this, '${topic.title}')"><i
+                                                    class="fas fa-trash-alt"></i></a>
+                                    </form>
                                 <#else>
                                     ${topic.id}
                                 </#if>
@@ -41,14 +45,18 @@
                             </td>
                         </tr>
                     <#else>
-                        <tr><td colspan="3">No Topics yet!</td></tr>
+                        <tr>
+                            <td colspan="3">No Topics yet!</td>
+                        </tr>
                     </#list>
                     </tbody>
                     <tfoot>
-                    <th>Remove</th>
-                    <th>Name</th>
-                    <th>Info</th>
-                    <th></th>
+                        <tr>
+                            <th>Remove</th>
+                            <th>Name</th>
+                            <th>Info</th>
+                            <th></th>
+                        </tr>
                     </tfoot>
                 </table>
                 <@p.pager page=topics url="/topics" />
@@ -57,7 +65,7 @@
     </div>
 
     <script>
-        function deletePrompt(element,title) {
+        function deletePrompt(element, title) {
             if (confirm("Are you sure to delete topic '" + title + "'")) {
                 element.parentElement.submit();
                 return true;
