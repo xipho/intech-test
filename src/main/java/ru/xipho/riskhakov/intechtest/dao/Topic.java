@@ -16,10 +16,6 @@ public class Topic {
     @JoinColumn(name = "user_id")
     private User author;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
-    private Category category;
-
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
     private Set<Post> posts;
 
@@ -45,14 +41,6 @@ public class Topic {
 
     public void setAuthor(User author) {
         this.author = author;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public Set<Post> getPosts() {
